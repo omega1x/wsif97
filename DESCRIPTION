@@ -1,0 +1,21 @@
+Package: wsif97
+Type: Package
+Title: Properties of Water and Steam - IAPWS Industrial Formulation
+Version: 0.0.1
+Authors@R: person("Yuri", "Possokhov", email = "possokhoff@gmail.com",
+  role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3570-4337"))
+Description: Implementation of some methods for calculation of  thermophysical 
+    properties of water and steam as they formulated by International 
+    Association for the Properties of Water and Steam (IAPWS). 
+URL: https://omega1x.github.io/wsif97/
+BugReports: https://github.com/omega1x/wsif97/issues
+Date: 2021-04-09
+License: GPL-3
+Encoding: UTF-8
+Imports: Rcpp (>= 1.0.5)
+LinkingTo: Rcpp
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0),
+    covr
+Config/testthat/edition: 3
