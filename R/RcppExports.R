@@ -105,8 +105,8 @@ tpv <- function(T, p) {
     .Call('_wsif97_tpv', PACKAGE = 'wsif97', T, p)
 }
 
-f <- function(T, p) {
-    .Call('_wsif97_f', PACKAGE = 'wsif97', T, p)
+f <- function(T, r) {
+    .Call('_wsif97_f', PACKAGE = 'wsif97', T, r)
 }
 
 #' Speed of sound vs temperature and pressure

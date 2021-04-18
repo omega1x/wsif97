@@ -102,14 +102,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // f
-double f(double T, double p);
-RcppExport SEXP _wsif97_f(SEXP TSEXP, SEXP pSEXP) {
+double f(double T, double r);
+RcppExport SEXP _wsif97_f(SEXP TSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type T(TSEXP);
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(f(T, p));
+    Rcpp::traits::input_parameter< double >::type r(rSEXP);
+    rcpp_result_gen = Rcpp::wrap(f(T, r));
     return rcpp_result_gen;
 END_RCPP
 }
