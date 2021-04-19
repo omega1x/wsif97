@@ -2,8 +2,8 @@
 
 #include <Rcpp.h>
 #include "wsif97tp.h"
-#include "wsif97satline.h"
-#include "wsif97tr.h"
+#include "wsif97linetp.h"
+
 
 using namespace std;
 using namespace Rcpp;
@@ -41,8 +41,8 @@ NumericVector tpv(NumericVector T, NumericVector p)
 
 
 //[[Rcpp::export]]
-double f(double T, double r){
-      return r797tr3::cv3Tr(T, r);
+double f(double p){
+      return r797b23::Tp(p);
 }
 
 

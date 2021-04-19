@@ -19,5 +19,7 @@ namespace r797tr3
     double cv3Tr(double T, double r);
     double cp3Tr(double T, double r);
     double w3Tr(double T, double r) ;
+    double e3Tr(double T, double r) ;
+    double i3Tr(double T, double r) ;
 }
 #endif

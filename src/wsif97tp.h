@@ -1,13 +1,23 @@
-/** Mini-library of properties of water and steam as functions of
- *  temperature and pressure in accordance with IAPWS formulation
- *  Reference:
- *     - IAPWS R7-97(2012)  <http://www.iapws.org/relguide/IF97-Rev.pdf>
- *     - IAPWS SR5-05(2016) <http://www.iapws.org/relguide/Supp-VPT3-2016.pdf>
- *     - iapws <doi:10.5281/zenodo.3734292>
- *  Units:
- *     - [T] = K
- *     - [p] = MPa
- */
+/**  Mini-library of properties of water and steam as functions of
+  *  temperature and pressure in accordance with IAPWS formulation
+  *  Reference:
+  *     - IAPWS R7-97(2012)  <http://www.iapws.org/relguide/IF97-Rev.pdf>
+  *     - IAPWS SR5-05(2016) <http://www.iapws.org/relguide/Supp-VPT3-2016.pdf>
+  *     - iapws <doi:10.5281/zenodo.3734292>
+  *  Argument units:
+  *     - [T] = K
+  *     - [p] = MPa
+  *  Properties:
+  *     - v  - specific volume, m³/kg
+  *     - u  - specific internal energy, kJ/kg
+  *     - s  - specific entropy, kJ/kg/K
+  *     - h  - specific enthalpy, kJ/kg
+  *     - cp - specific isobaric heat capacity, kJ/kg/K
+  *     - cv - specific isohoric heat capacity, kJ/kg/K
+  *     - w  - speed of sound, m/s
+  *     - e  - cubic expansion coefficient, 1/K
+  *     - i  - isothermal compressibility, 1/MPa
+  **/
 
 #ifndef WSIF97TP_H
 #define WSIF97TP_H
@@ -54,6 +64,14 @@ namespace r797tp2metastable
 namespace sr505tp3
 {
     double v3Tp(double T, double p) ;
+    double u3Tp(double T, double p) ;
+    double s3Tp(double T, double p) ;
+    double h3Tp(double T, double p) ;
+    double cp3Tp(double T, double p);
+    double cv3Tp(double T, double p);
+    double w3Tp(double T, double p) ;
+    double e3Tp(double T, double p) ;
+    double i3Tp(double T, double p) ;
 }
 
 namespace r797tp5

@@ -148,4 +148,28 @@ namespace r797tr3
         );
    }
 
+   double e3Tr(double T, double r)
+   {
+     /// cubic expansion coefficient
+     /// test: c(0.00441515098)
+     const double delta = r/rc;
+     const double tau = Tc/T;
+     const double e = (
+             phid(delta, tau) - tau * phidt(delta, tau)
+         )/(2 * phid(delta, tau) + delta * phidd(delta, tau))/T;  /// [1/K]
+     return e;
+   }
+
+   double i3Tr(double T, double r)
+   {
+     /// isothermal compressibility
+     /// test: c(0.00806710817)
+     const double delta = r/rc;
+     const double tau = Tc/T;
+     const double i = 1e3/(
+             2 * delta * phid(delta, tau) + delta * delta *phidd(delta, tau)
+        )/r/0.461526/T;  /// [1/MPa]
+     return i;
+   }
+
 }

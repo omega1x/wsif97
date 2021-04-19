@@ -5,7 +5,8 @@
   */
 
 #include <math.h>
-#include "wsif97satline.h"
+#include "wsif97linetp.h"
+#include "wsif97tr.h"
 
 /**  IAPWS R7-97(2012). Region1 **/
 namespace r797tp1 {
@@ -940,7 +941,64 @@ namespace sr505tp3{
       if (id == -1) return -1.;  /// when no subregion of Region 3 is found
       return v3Tpid(T, p, id);
     }
+
+    double u3Tp(double T, double p)
+    {
+       const double v = v3Tp(T, p);
+       if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+       return r797tr3::u3Tr(T, 1/v);
+    }
+
+    double s3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::s3Tr(T, 1/v);
+    }
+
+    double h3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::h3Tr(T, 1/v);
+    }
+
+    double cp3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::cp3Tr(T, 1/v);
+    }
+
+    double cv3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::cv3Tr(T, 1/v);
+    }
+
+    double w3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::w3Tr(T, 1/v);
+    }
+
+    double e3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::e3Tr(T, 1/v);
+    }
+
+    double i3Tp(double T, double p)
+    {
+      const double v = v3Tp(T, p);
+      if (v <= 0) return -1.;  /// when no subregion of Region 3 is found
+      return r797tr3::i3Tr(T, 1/v);
+    }
 }
+
 
 ///  Region 4 of IAPWS R7-97(2012) is described in *wsif97satline.cpp*
 
@@ -1128,5 +1186,45 @@ namespace r797tp5 {
         const double tau = 1e3/T;
         const double i = (1 - pi * pi * ggpp(pi, tau))/(1 + pi * ggp(pi, tau))/p;  ///[1/MPa]
         return i;
+    }
+}
+
+
+namespace r797tp
+{
+    int region(double T, double p)
+    {
+
+        const double pmin = 6.11212677444e-4;  /// minimum possible pressure, [MPa]
+        const double ps623 = 16.5291642526;  /// saturation pressure at 623.15 K, [MPa]
+        int id = -1;  /// error code
+
+        if (1073.15 < T && T <= 2273.15 && pmin <= p && p <= 50) id = 5;
+        else if (pmin <= p && p <= ps623) {
+            const double tsat = r797satline::Tp(p);
+            if (273.15 <= T && T <= tsat) id = 1;
+            else if (tsat < T && T <= 1073.15) id = 2;
+        }
+        else if (ps623 < p && p <= 100){
+            const double t23 = r797b23::Tp(p);
+            if (273.15 <= T && T <= 623.15) id = 1;
+            else if (623.15 < T && T < t23) id = 3;
+            else if (t23 <= T && T <= 1073.15) id = 2;
+        }
+        return id;
+    }
+
+    const double error_code[2] = {
+          -10,  /// fail determine region
+          -20   /// fail determine subregion in Region 3
+    };
+
+    /** Base properties */
+    double vTp(double T, double p)
+    {
+        const int id = region(T, p);
+        if (id <= 0) return error_code[0];
+        return 777.777;
+        // TODO: further alg
     }
 }
