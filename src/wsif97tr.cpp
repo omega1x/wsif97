@@ -10,17 +10,17 @@
 /**  IAPWS R7-97(2012). Region 3 **/
 namespace r797tr3
 {
-    const int N = 39;
-    const int I[N] = {
+    constexpr int N = 39;
+    constexpr int I[N] = {
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2,  2,  2,  2, 2, 3, 3, 3, 3, 3, 4,
         4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 8, 9, 9, 10, 10, 11
     };
-    const int J[N] = {
+    constexpr int J[N] = {
          0, 1,  2,  7, 10, 12, 23,  2, 6, 15, 17, 0, 2,  6, 7, 22, 26,  0,
          2, 4, 16, 26,  0,  2,  4, 26, 1,  3, 26, 0, 2, 26, 2, 26,  2, 26,
          0, 1, 26
     };
-    const double n[N] = {
+    constexpr double n[N] = {
       -1.573284529023900e+01, 2.094439697430700e+01,-7.686770787871600e+00,
        2.618594778795400e+00,-2.808078114862000e+00, 1.205336969651700e+00,
       -8.456681281250201e-03,-1.265431547771400e+00,-1.152440780668100e+00,
@@ -78,15 +78,15 @@ namespace r797tr3
 
    double phidt(double delta, double tau)
    {
-     double z = 0;
-     for (int i = 0; i < N; i++)
-       z += n[i] * I[i] * pow(delta, I[i] - 1) * J[i] * pow(tau, J[i] - 1);
-     return z;
+        double z = 0;
+        for (int i = 0; i < N; i++)
+            z += n[i] * I[i] * pow(delta, I[i] - 1) * J[i] * pow(tau, J[i] - 1);
+        return z;
    }
 
    /** Properties */
-   const double Tc = 647.096;  /// [K]
-   const double rc = 322;      /// [kg/m³]
+   constexpr double Tc = 647.096;  /// [K]
+   constexpr double rc = 322;      /// [kg/m³]
 
    double p3Tr(double T, double r)
    {

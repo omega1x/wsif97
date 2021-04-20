@@ -13,7 +13,7 @@ namespace r797satline
 
     double pT(double T)
     {
-        const double n[11] = {0,
+        constexpr double n[11] = {0,
             0.11670521452767e4, -0.72421316703206e6, -0.17073846940092e2,
             0.12020824702470e5, -0.32325550322333e7,  0.14915108613530e2,
            -0.48232657361591e4,  0.40511340542057e6, -0.23855557567849,
@@ -29,8 +29,8 @@ namespace r797satline
 
     double Tp(double p)
     {
-        const int N = 11;
-        const double n[N] = {0,
+        constexpr int N = 11;
+        constexpr double n[N] = {0,
             0.11670521452767e4, -0.72421316703206e6, -0.17073846940092e2,
             0.12020824702470e5, -0.32325550322333e7,  0.14915108613530e2,
            -0.48232657361591e4,  0.40511340542057e6, -0.23855557567849  ,
@@ -48,18 +48,18 @@ namespace r797satline
 
 namespace r797b23
 {
-    const double n[6] = {0,
+    constexpr double n[6] = {0,
         0.34805185628969e3, -0.11671859879975e1, 0.10192970039326e-2,
         0.57254459862746e3,  0.1391883977870e2
     };
 
-    double pT(double T)
+    constexpr double pT(double T)
     {
         return n[1] + n[2] * T + n[3] * T * T;
     }
 
     double Tp(double p)
     {
-        return n[4]+sqrt((p - n[5])/n[3]);
+        return n[4]+ sqrt((p - n[5])/n[3]);
     }
 }
