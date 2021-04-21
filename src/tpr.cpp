@@ -6,10 +6,10 @@
 using namespace std;
 using namespace Rcpp;
 
-//' @title Specific volume vs temperature and pressure
+//' @title Mass density vs temperature and pressure
 //'
 //' @description
-//'   Calculate \emph{specific volume} as a function of \emph{temperature} and
+//'   Calculate \emph{mass density} as a function of \emph{temperature} and
 //'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
 //'
 //' @family temperature-pressure space
@@ -19,6 +19,7 @@ using namespace Rcpp;
 //'   \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
 //'   are not applicable in this context.
 //'
+//'   The accuracy of this property is
 //'   In current version numerical consistency of the specific volume
 //'   in \emph{Region 3} of \emph{IAPWS R7-97} is considered sufficient enough
 //'   for most applications. That is why no additional iteration procedures are

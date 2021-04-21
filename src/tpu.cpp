@@ -23,13 +23,13 @@ NumericVector tpu(NumericVector T, NumericVector p)
 
     for(int i = 0; i < n; i++){
         // if first region:
-        y[i] = r797tp1::u1Tp(T[i], p[i]);
+        //y[i] = r797tp1::u1Tp(T[i], p[i]);
         // if second region:
-        y[i] = r797tp2::u2Tp(T[i], p[i]);
+        //y[i] = r797tp2::u2Tp(T[i], p[i]);
         // if metastable region:
-        y[i] = r797tp2metastable::u2msTp(T[i], p[i]);
+        //y[i] = r797tp2metastable::u2msTp(T[i], p[i]);
         // if fifth region:
-        y[i] = r797tp5::u5Tp(T[i], p[i]);
+        //y[i] = r797tp5::u5Tp(T[i], p[i]);
     }
     return y;
 }

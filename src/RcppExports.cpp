@@ -101,17 +101,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// f
-double f(double p);
-RcppExport SEXP _wsif97_f(SEXP pSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(f(p));
-    return rcpp_result_gen;
-END_RCPP
-}
 // tpw
 NumericVector tpw(NumericVector T, NumericVector p);
 RcppExport SEXP _wsif97_tpw(SEXP TSEXP, SEXP pSEXP) {
@@ -134,7 +123,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_wsif97_tps", (DL_FUNC) &_wsif97_tps, 2},
     {"_wsif97_tpu", (DL_FUNC) &_wsif97_tpu, 2},
     {"_wsif97_tpv", (DL_FUNC) &_wsif97_tpv, 2},
-    {"_wsif97_f", (DL_FUNC) &_wsif97_f, 1},
     {"_wsif97_tpw", (DL_FUNC) &_wsif97_tpw, 2},
     {NULL, NULL, 0}
 };

@@ -5,22 +5,22 @@
   */
 
 #include <math.h>
-
+#include "wsif97tr.h"   ///self header
 
 /**  IAPWS R7-97(2012). Region 3 **/
 namespace r797tr3
 {
-    constexpr int N = 39;
-    constexpr int I[N] = {
+    constexpr int N {39};
+    constexpr int I[N] {
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2,  2,  2,  2, 2, 3, 3, 3, 3, 3, 4,
         4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 8, 9, 9, 10, 10, 11
     };
-    constexpr int J[N] = {
+    constexpr int J[N] {
          0, 1,  2,  7, 10, 12, 23,  2, 6, 15, 17, 0, 2,  6, 7, 22, 26,  0,
          2, 4, 16, 26,  0,  2,  4, 26, 1,  3, 26, 0, 2, 26, 2, 26,  2, 26,
          0, 1, 26
     };
-    constexpr double n[N] = {
+    constexpr double n[N] {
       -1.573284529023900e+01, 2.094439697430700e+01,-7.686770787871600e+00,
        2.618594778795400e+00,-2.808078114862000e+00, 1.205336969651700e+00,
       -8.456681281250201e-03,-1.265431547771400e+00,-1.152440780668100e+00,
@@ -85,8 +85,8 @@ namespace r797tr3
    }
 
    /** Properties */
-   constexpr double Tc = 647.096;  /// [K]
-   constexpr double rc = 322;      /// [kg/m³]
+   constexpr double Tc {647.096};  /// [K]
+   constexpr double rc {322};      /// [kg/m³]
 
    double p3Tr(double T, double r)
    {
@@ -167,7 +167,7 @@ namespace r797tr3
      const double delta = r/rc;
      const double tau = Tc/T;
      const double i = 1e3/(
-             2 * delta * phid(delta, tau) + delta * delta *phidd(delta, tau)
+             2 * delta * phid(delta, tau) + delta * delta * phidd(delta, tau)
         )/r/0.461526/T;  /// [1/MPa]
      return i;
    }

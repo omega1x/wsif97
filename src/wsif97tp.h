@@ -22,6 +22,8 @@
 #ifndef WSIF97TP_H
 #define WSIF97TP_H
 
+
+/*
 namespace r797tp1
 {
     double v1Tp(double T,  double p) ;
@@ -85,6 +87,15 @@ namespace r797tp5
     double w5Tp(double T, double p)  ;
     double e5Tp(double T, double p)  ;
     double i5Tp(double T, double p)  ;
+}
+
+*/
+
+namespace r797tp
+{
+    double vTp(double T, double p)  ;
+
+
 }
 
 #endif
