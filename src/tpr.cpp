@@ -12,18 +12,16 @@ using namespace Rcpp;
 //'   Calculate \emph{mass density} as a function of \emph{temperature} and
 //'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
 //'
-//' @family temperature-pressure space
+//' @family properties in temperature-pressure space
 //'
 //' @details
 //'   Vectors \code{T} and \code{p} both must have the same length. Default
 //'   \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
 //'   are not applicable in this context.
 //'
-//'   The accuracy of this property is
-//'   In current version numerical consistency of the specific volume
-//'   in \emph{Region 3} of \emph{IAPWS R7-97} is considered sufficient enough
-//'   for most applications. That is why no additional iteration procedures are
-//'   used for reaching higher accuracy in this region.
+//'   The accuracy of calculation for this property in \emph{Region 3} depends
+//'   on accuracy of \emph{specific volume} in this region. See details for
+//'   \code{\link{tpv}}.
 //'
 //' @param T
 //'   absolute temperature in validity range 273.15 -- 2273.15, [\emph{K}].
@@ -32,7 +30,7 @@ using namespace Rcpp;
 //'   absolute pressure in validity range 0 -- 100 \emph{MPa}, [\emph{MPa}].
 //'   Type: \code{NumericVector}
 //' @return
-//'   specific volume, [\eqn{m^3/kg}], or the next error code:
+//'   mass density, [\eqn{kg/m^3}], or the next error code:
 //'   \describe{
 //'       \item{\code{-10}}{
 //'         Fail to determine region in temperature-pressure space into which the
@@ -62,17 +60,17 @@ using namespace Rcpp;
 //'  }
 //'
 //' @examples
-//'  t <- c(300,300,500,300,700,700,1500,1500,2000)  # [K]
-//'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30)  # [MPa]
-//'  tpv(t, p)
+//'  t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+//'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
+//'  tpr(t, p)
 //'
 //' @export
 //[[Rcpp::export]]
-NumericVector tpv(NumericVector T, NumericVector p)
+NumericVector tpr(NumericVector T, NumericVector p)
 {
     if (T.size() != p.size()) stop("Arguments must be of the same length");
     NumericVector y = T;
     const int n = y.size();
-    for (int i = 0; i < n; i++) y[i] = r797tp::vTp(T[i], p[i]);
+    for (int i = 0; i < n; i++) y[i] = r797tp::rTp(T[i], p[i]);
     return y;
 }

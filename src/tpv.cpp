@@ -12,7 +12,7 @@ using namespace Rcpp;
 //'   Calculate \emph{specific volume} as a function of \emph{temperature} and
 //'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
 //'
-//' @family temperature-pressure space
+//' @family properties in temperature-pressure space
 //'
 //' @details
 //'   Vectors \code{T} and \code{p} both must have the same length. Default
@@ -61,8 +61,8 @@ using namespace Rcpp;
 //'  }
 //'
 //' @examples
-//'  t <- c(300,300,500,300,700,700,1500,1500,2000)  # [K]
-//'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30)  # [MPa]
+//'  t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+//'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
 //'  tpv(t, p)
 //'
 //' @export

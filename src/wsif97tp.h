@@ -94,8 +94,8 @@ namespace r797tp5
 namespace r797tp
 {
     double vTp(double T, double p)  ;
-
-
+    double rTp(double T, double p)  ;
+    double uTp(double T, double p)  ;
 }
 
 #endif

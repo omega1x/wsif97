@@ -66,49 +66,22 @@ tpi <- function(T, p) {
     .Call('_wsif97_tpi', PACKAGE = 'wsif97', T, p)
 }
 
-#' Specific entropy vs temperature and pressure
-#'
-#' @param T
-#'   absolute temperature, [\emph{K}]
-#' @param p
-#'   absolute pressure, [\emph{MPa}]
-#' @return
-#'   specific entropy, [\eqn{kJ/kg/K}]
-#' @export
-tps <- function(T, p) {
-    .Call('_wsif97_tps', PACKAGE = 'wsif97', T, p)
-}
-
-#' Specific internal energy vs temperature and pressure
-#'
-#' @param T
-#'   absolute temperature, [\emph{K}]
-#' @param p
-#'   absolute pressure, [\emph{MPa}]
-#' @return
-#'   specific internal energy, [\eqn{kJ/kg}]
-#' @export
-tpu <- function(T, p) {
-    .Call('_wsif97_tpu', PACKAGE = 'wsif97', T, p)
-}
-
-#' @title Specific volume vs temperature and pressure
+#' @title Mass density vs temperature and pressure
 #'
 #' @description
-#'   Calculate \emph{specific volume} as a function of \emph{temperature} and
+#'   Calculate \emph{mass density} as a function of \emph{temperature} and
 #'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
 #'
-#' @family temperature-pressure space
+#' @family properties in temperature-pressure space
 #'
 #' @details
 #'   Vectors \code{T} and \code{p} both must have the same length. Default
 #'   \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
 #'   are not applicable in this context.
 #'
-#'   In current version numerical consistency of the specific volume
-#'   in \emph{Region 3} of \emph{IAPWS R7-97} is considered sufficient enough
-#'   for most applications. That is why no additional iteration procedures are
-#'   used for reaching higher accuracy in this region.
+#'   The accuracy of calculation for this property in \emph{Region 3} depends
+#'   on accuracy of \emph{specific volume} in this region. See details for
+#'   \code{\link{tpv}}.
 #'
 #' @param T
 #'   absolute temperature in validity range 273.15 -- 2273.15, [\emph{K}].
@@ -117,7 +90,7 @@ tpu <- function(T, p) {
 #'   absolute pressure in validity range 0 -- 100 \emph{MPa}, [\emph{MPa}].
 #'   Type: \code{NumericVector}
 #' @return
-#'   specific volume, [\eqn{m^3/kg}], or error code:
+#'   mass density, [\eqn{kg/m^3}], or the next error code:
 #'   \describe{
 #'       \item{\code{-10}}{
 #'         Fail to determine region in temperature-pressure space into which the
@@ -147,8 +120,148 @@ tpu <- function(T, p) {
 #'  }
 #'
 #' @examples
-#'  t <- c(300,300,500,300,700,700,1500,1500,2000)  # [K]
-#'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30)  # [MPa]
+#'  t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+#'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
+#'  tpr(t, p)
+#'
+#' @export
+tpr <- function(T, p) {
+    .Call('_wsif97_tpr', PACKAGE = 'wsif97', T, p)
+}
+
+#' Specific entropy vs temperature and pressure
+#'
+#' @param T
+#'   absolute temperature, [\emph{K}]
+#' @param p
+#'   absolute pressure, [\emph{MPa}]
+#' @return
+#'   specific entropy, [\eqn{kJ/kg/K}]
+#' @export
+tps <- function(T, p) {
+    .Call('_wsif97_tps', PACKAGE = 'wsif97', T, p)
+}
+
+#' @title Internal energy vs temperature and pressure
+#'
+#' @description
+#'   Calculate specific \emph{internal energy} as a function of \emph{temperature} and
+#'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
+#'
+#' @family properties in temperature-pressure space
+#'
+#' @details
+#'   Vectors \code{T} and \code{p} both must have the same length. Default
+#'   \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
+#'   are not applicable in this context.
+#'
+#'   The accuracy of calculation for this property in \emph{Region 3} depends
+#'   on accuracy of \emph{specific volume} in this region. See details for
+#'   \code{\link{tpv}}.
+#'
+#' @param T
+#'   absolute temperature in validity range 273.15 -- 2273.15, [\emph{K}].
+#'   Type: \code{NumericVector}
+#' @param p
+#'   absolute pressure in validity range 0 -- 100 \emph{MPa}, [\emph{MPa}].
+#'   Type: \code{NumericVector}
+#' @return
+#'   specific internal energy, [\eqn{kg/m^3}], or the next error code:
+#'   \describe{
+#'       \item{\code{-10}}{
+#'         Fail to determine region in temperature-pressure space into which the
+#'         entire range of validity of \emph{IAPWS R7-97}
+#'         is divided. Possibly values of one or both arguments are
+#'         out of bounds or in undeterminable subspace.
+#'       }
+#'       \item{\code{-20}}{
+#'         Fail to determine subregion inside \emph{Region 3} in accordance
+#'         with \emph{IAPWS SR5-05}. Possibly values of one or both arguments
+#'         are in undeterminable subspace or near singularity.
+#'       }
+#'   }
+#'   Type: \code{NumericVector}
+#'
+#' @references
+#'  \itemize{
+#'   \item \href{http://www.iapws.org/relguide/IF97-Rev.pdf}{IAPWS R7-97 (2012)},
+#'   \emph{Revised Release on the IAPWS Industrial Formulation 1997 for the
+#'   Thermodynamic Properties of Water and Steam}. August 2007.
+#'
+#'   \item \href{http://www.iapws.org/relguide/Supp-VPT3-2016.pdf}{IAPWS SR5-05 (2016)},
+#'   \emph{Revised Supplementary Release on Backward Equations for Specific
+#'   Volume as a Function of Pressure and Temperature v(p,T) for Region 3 of the
+#'   IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and
+#'   Steam}. June 2014.
+#'  }
+#'
+#' @examples
+#'  t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+#'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
+#'  tpu(t, p)
+#'
+#' @export
+tpu <- function(T, p) {
+    .Call('_wsif97_tpu', PACKAGE = 'wsif97', T, p)
+}
+
+#' @title Specific volume vs temperature and pressure
+#'
+#' @description
+#'   Calculate \emph{specific volume} as a function of \emph{temperature} and
+#'   \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
+#'
+#' @family properties in temperature-pressure space
+#'
+#' @details
+#'   Vectors \code{T} and \code{p} both must have the same length. Default
+#'   \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
+#'   are not applicable in this context.
+#'
+#'   In current version numerical consistency of the specific volume
+#'   in \emph{Region 3} of \emph{IAPWS R7-97} is considered sufficient enough
+#'   for most applications. That is why no additional iteration procedures are
+#'   used for reaching higher accuracy in this region.
+#'
+#' @param T
+#'   absolute temperature in validity range 273.15 -- 2273.15, [\emph{K}].
+#'   Type: \code{NumericVector}
+#' @param p
+#'   absolute pressure in validity range 0 -- 100 \emph{MPa}, [\emph{MPa}].
+#'   Type: \code{NumericVector}
+#' @return
+#'   specific volume, [\eqn{m^3/kg}], or the next error code:
+#'   \describe{
+#'       \item{\code{-10}}{
+#'         Fail to determine region in temperature-pressure space into which the
+#'         entire range of validity of \emph{IAPWS R7-97}
+#'         is divided. Possibly values of one or both arguments are
+#'         out of bounds or in undeterminable subspace.
+#'       }
+#'       \item{\code{-20}}{
+#'         Fail to determine subregion inside \emph{Region 3} in accordance
+#'         with \emph{IAPWS SR5-05}. Possibly values of one or both arguments
+#'         are in undeterminable subspace or near singularity.
+#'       }
+#'   }
+#'   Type: \code{NumericVector}
+#'
+#' @references
+#'  \itemize{
+#'   \item \href{http://www.iapws.org/relguide/IF97-Rev.pdf}{IAPWS R7-97 (2012)},
+#'   \emph{Revised Release on the IAPWS Industrial Formulation 1997 for the
+#'   Thermodynamic Properties of Water and Steam}. August 2007.
+#'
+#'   \item \href{http://www.iapws.org/relguide/Supp-VPT3-2016.pdf}{IAPWS SR5-05 (2016)},
+#'   \emph{Revised Supplementary Release on Backward Equations for Specific
+#'   Volume as a Function of Pressure and Temperature v(p,T) for Region 3 of the
+#'   IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and
+#'   Steam}. June 2014.
+#'  }
+#'
+#' @examples
+#'  t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+#'  p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
 #'  tpv(t, p)
 #'
 #' @export

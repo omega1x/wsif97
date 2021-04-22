@@ -1223,26 +1223,41 @@ namespace r797tp
     double vTp(double T, double p)  /// specific volume, [m³/kg]
     {
         const int id = region(T, p);
-        double v = error_code[0];
+        double x = error_code[0];
         switch(id) {
-            case 1: v = r797tp1::v1Tp(T, p);  break;
-            case 2: v = r797tp2::v2Tp(T, p);  break;
-            case 5: v = r797tp5::v5Tp(T, p);  break;
+            case 1: x = r797tp1::v1Tp(T, p);  break;
+            case 2: x = r797tp2::v2Tp(T, p);  break;
+            case 5: x = r797tp5::v5Tp(T, p);  break;
             case 3: {
-              const double v3 = sr505tp3::v3Tp(T, p);
-              v = (v3 < 0 ? error_code[1] : v3);
+              const double x3 = sr505tp3::v3Tp(T, p);
+              x = (x3 < 0 ? error_code[1] : x3);
             }
         }
-        return v;
+        return x;
     }
 
+    double uTp(double T, double p)  /// specific internal energy
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::u1Tp(T, p);  break;
+      case 2: x = r797tp2::u2Tp(T, p);  break;
+      case 5: x = r797tp5::u5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::u3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
 
     /** Supplementary properties */
     double rTp(double T, double p)  /// mass density, [kg/m³]
     {
-        const double v = vTp(T, p);
-        if (v > 0) return 1/v;
-        return (v > error_code[0] ? error_code[0] : v);
+        const double x = vTp(T, p);
+        if (x > 0) return 1/x;
+        return (x > error_code[0] ? error_code[0] : x);
     }
 
 

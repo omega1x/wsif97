@@ -14,7 +14,7 @@ Type: \code{NumericVector}}
 Type: \code{NumericVector}}
 }
 \value{
-specific volume, [\eqn{m^3/kg}], or error code:
+specific volume, [\eqn{m^3/kg}], or the next error code:
   \describe{
       \item{\code{-10}}{
         Fail to determine region in temperature-pressure space into which the
@@ -45,8 +45,8 @@ Vectors \code{T} and \code{p} both must have the same length. Default
   used for reaching higher accuracy in this region.
 }
 \examples{
- t <- c(300,300,500,300,700,700,1500,1500,2000)  # [K]
- p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30)  # [MPa]
+ t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+ p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
  tpv(t, p)
 
 }
@@ -63,4 +63,9 @@ Vectors \code{T} and \code{p} both must have the same length. Default
   Steam}. June 2014.
  }
 }
-\concept{temperature-pressure space}
+\seealso{
+Other properties in temperature-pressure space: 
+\code{\link{tpr}()},
+\code{\link{tpu}()}
+}
+\concept{properties in temperature-pressure space}
