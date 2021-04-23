@@ -6,61 +6,61 @@
 using namespace Rcpp;
 
 // tpcp
-NumericVector tpcp(NumericVector T, NumericVector p);
+std::vector<double> tpcp(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpcp(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpcp(T, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // tpcv
-NumericVector tpcv(NumericVector T, NumericVector p);
+std::vector<double> tpcv(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpcv(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpcv(T, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // tpe
-NumericVector tpe(NumericVector T, NumericVector p);
+std::vector<double> tpe(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpe(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpe(T, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // tph
-NumericVector tph(NumericVector T, NumericVector p);
+std::vector<double> tph(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tph(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tph(T, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // tpi
-NumericVector tpi(NumericVector T, NumericVector p);
+std::vector<double> tpi(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpi(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpi(T, p));
     return rcpp_result_gen;
 END_RCPP
@@ -78,13 +78,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // tps
-NumericVector tps(NumericVector T, NumericVector p);
+std::vector<double> tps(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tps(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tps(T, p));
     return rcpp_result_gen;
 END_RCPP
@@ -114,13 +114,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // tpw
-NumericVector tpw(NumericVector T, NumericVector p);
+std::vector<double> tpw(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpw(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpw(T, p));
     return rcpp_result_gen;
 END_RCPP

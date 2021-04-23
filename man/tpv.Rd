@@ -65,7 +65,14 @@ Vectors \code{T} and \code{p} both must have the same length. Default
 }
 \seealso{
 Other properties in temperature-pressure space: 
+\code{\link{tpcp}()},
+\code{\link{tpcv}()},
+\code{\link{tpe}()},
+\code{\link{tph}()},
+\code{\link{tpi}()},
 \code{\link{tpr}()},
-\code{\link{tpu}()}
+\code{\link{tps}()},
+\code{\link{tpu}()},
+\code{\link{tpw}()}
 }
 \concept{properties in temperature-pressure space}

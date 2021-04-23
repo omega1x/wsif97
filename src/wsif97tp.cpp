@@ -1236,7 +1236,7 @@ namespace r797tp
         return x;
     }
 
-    double uTp(double T, double p)  /// specific internal energy
+    double uTp(double T, double p)  /// specific internal energy, [kJ/kg]
     {
       const int id = region(T, p);
       double x = error_code[0];
@@ -1246,6 +1246,118 @@ namespace r797tp
       case 5: x = r797tp5::u5Tp(T, p);  break;
       case 3: {
         const double x3 = sr505tp3::u3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double sTp(double T, double p)  /// specific entropy, [kJ/kg/K]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::s1Tp(T, p);  break;
+      case 2: x = r797tp2::s2Tp(T, p);  break;
+      case 5: x = r797tp5::s5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::s3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double hTp(double T, double p)  /// specific enthalpy, [kJ/kg]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::h1Tp(T, p);  break;
+      case 2: x = r797tp2::h2Tp(T, p);  break;
+      case 5: x = r797tp5::h5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::h3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double cpTp(double T, double p)  /// specific isobaric heat capacity, [kJ/kg/K]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::cp1Tp(T, p);  break;
+      case 2: x = r797tp2::cp2Tp(T, p);  break;
+      case 5: x = r797tp5::cp5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::cp3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double cvTp(double T, double p)  /// specific isochoric heat capacity, [kJ/kg/K]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::cv1Tp(T, p);  break;
+      case 2: x = r797tp2::cv2Tp(T, p);  break;
+      case 5: x = r797tp5::cv5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::cv3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double wTp(double T, double p)  /// speed of sound, [m/s]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::w1Tp(T, p);  break;
+      case 2: x = r797tp2::w2Tp(T, p);  break;
+      case 5: x = r797tp5::w5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::w3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double eTp(double T, double p)  /// cubic expansion coefficient, [1/K]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::e1Tp(T, p);  break;
+      case 2: x = r797tp2::e2Tp(T, p);  break;
+      case 5: x = r797tp5::e5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::e3Tp(T, p);
+        x = (x3 < 0 ? error_code[1] : x3);
+      }
+      }
+      return x;
+    }
+
+    double iTp(double T, double p)  /// isothermal compressibility, [1/MPa]
+    {
+      const int id = region(T, p);
+      double x = error_code[0];
+      switch(id) {
+      case 1: x = r797tp1::i1Tp(T, p);  break;
+      case 2: x = r797tp2::i2Tp(T, p);  break;
+      case 5: x = r797tp5::i5Tp(T, p);  break;
+      case 3: {
+        const double x3 = sr505tp3::i3Tp(T, p);
         x = (x3 < 0 ? error_code[1] : x3);
       }
       }

@@ -93,9 +93,17 @@ namespace r797tp5
 
 namespace r797tp
 {
-    double vTp(double T, double p)  ;
-    double rTp(double T, double p)  ;
-    double uTp(double T, double p)  ;
+    double vTp(double T, double p)  ;  /// specific volume, [m³/kg]
+    double uTp(double T, double p)  ;  /// specific internal energy, [kJ/kg]
+    double sTp(double T, double p)  ;  /// specific entropy, [kJ/kg/K]
+    double hTp(double T, double p)  ;  /// specific enthalpy, [kJ/kg]
+    double cpTp(double T, double p) ;  /// specific isobaric heat capacity, [kJ/kg/K]
+    double cvTp(double T, double p) ;  /// specific isochoric heat capacity, [kJ/kg/K]
+    double wTp(double T, double p)  ;  /// speed of sound, [m/s]
+    double eTp(double T, double p)  ;  /// cubic expansion coefficient, [1/K]
+    double iTp(double T, double p)  ;  /// isothermal compressibility, [1/MPa]
+
+    double rTp(double T, double p)  ;  /// mass density, [kg/m³]
 }
 
 #endif

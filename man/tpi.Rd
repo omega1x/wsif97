@@ -2,18 +2,76 @@
 % Please edit documentation in R/RcppExports.R
 \name{tpi}
 \alias{tpi}
-\title{Isothermal compressibility vs temperature and pressure}
+\title{Compressibility vs temperature and pressure}
 \usage{
 tpi(T, p)
 }
 \arguments{
-\item{T}{absolute temperature, [\emph{K}]}
+\item{T}{absolute temperature in validity range 273.15 -- 2273.15, [\emph{K}].
+Type: \code{NumericVector}}
 
-\item{p}{absolute pressure, [\emph{MPa}]}
+\item{p}{absolute pressure in validity range 0 -- 100 \emph{MPa}, [\emph{MPa}].
+Type: \code{NumericVector}}
 }
 \value{
-Isothermal compressibility, [\eqn{1/MPa}]
+isothermal compressibility, [\eqn{1/MPa}], or the next error code:
+  \describe{
+      \item{\code{-10}}{
+        Fail to determine region in temperature-pressure space into which the
+        entire range of validity of \emph{IAPWS R7-97}
+        is divided. Possibly values of one or both arguments are
+        out of bounds or in undeterminable subspace.
+      }
+      \item{\code{-20}}{
+        Fail to determine subregion inside \emph{Region 3} in accordance
+        with \emph{IAPWS SR5-05}. Possibly values of one or both arguments
+        are in undeterminable subspace or near singularity.
+      }
+  }
+  Type: \code{NumericVector}
 }
 \description{
-Isothermal compressibility vs temperature and pressure
+Calculate \emph{isothermal compressibility} as a function of \emph{temperature} and
+  \emph{pressure} in accordance with \emph{IAPWS R7-97} formulation.
 }
+\details{
+Vectors \code{T} and \code{p} both must have the same length. Default
+  \href{https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Vector-arithmetic}{recycling rules}
+  are not applicable in this context.
+
+  The accuracy of calculation for this property in \emph{Region 3} depends
+  on accuracy of \emph{specific volume} in this region. See details for
+  \code{\link{tpv}}.
+}
+\examples{
+ t <- c(300,300,500,300,700,700,1500,1500,2000,0)  # [K]
+ p <- c(3,80,3,.35e-2,.35e-2,30,.5,30,30,0)  # [MPa]
+ tpi(t, p)
+
+}
+\references{
+\itemize{
+  \item \href{http://www.iapws.org/relguide/IF97-Rev.pdf}{IAPWS R7-97 (2012)},
+  \emph{Revised Release on the IAPWS Industrial Formulation 1997 for the
+  Thermodynamic Properties of Water and Steam}. August 2007.
+
+  \item \href{http://www.iapws.org/relguide/Supp-VPT3-2016.pdf}{IAPWS SR5-05 (2016)},
+  \emph{Revised Supplementary Release on Backward Equations for Specific
+  Volume as a Function of Pressure and Temperature v(p,T) for Region 3 of the
+  IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and
+  Steam}. June 2014.
+ }
+}
+\seealso{
+Other properties in temperature-pressure space: 
+\code{\link{tpcp}()},
+\code{\link{tpcv}()},
+\code{\link{tpe}()},
+\code{\link{tph}()},
+\code{\link{tpr}()},
+\code{\link{tps}()},
+\code{\link{tpu}()},
+\code{\link{tpv}()},
+\code{\link{tpw}()}
+}
+\concept{properties in temperature-pressure space}
