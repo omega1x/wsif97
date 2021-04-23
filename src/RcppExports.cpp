@@ -66,13 +66,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // tpr
-NumericVector tpr(NumericVector T, NumericVector p);
+std::vector<double> tpr(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpr(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpr(T, p));
     return rcpp_result_gen;
 END_RCPP
@@ -90,25 +90,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // tpu
-NumericVector tpu(const NumericVector T, const NumericVector p);
+std::vector<double> tpu(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpu(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< const NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpu(T, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // tpv
-NumericVector tpv(NumericVector T, NumericVector p);
+std::vector<double> tpv(const std::vector<double> T, const std::vector<double> p);
 RcppExport SEXP _wsif97_tpv(SEXP TSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type T(TSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type T(TSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double> >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(tpv(T, p));
     return rcpp_result_gen;
 END_RCPP

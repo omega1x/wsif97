@@ -3,7 +3,6 @@
 #include <Rcpp.h>
 #include "wsif97tp.h"
 
-using namespace std;
 using namespace Rcpp;
 
 //' @title Specific volume vs temperature and pressure
@@ -67,11 +66,12 @@ using namespace Rcpp;
 //'
 //' @export
 //[[Rcpp::export]]
-NumericVector tpv(NumericVector T, NumericVector p)
+std::vector<double> tpv(const std::vector<double> T, const std::vector<double> p)
 {
-    if (T.size() != p.size()) stop("Arguments must be of the same length");
-    NumericVector y = T;
-    const int n = y.size();
-    for (int i = 0; i < n; i++) y[i] = r797tp::vTp(T[i], p[i]);
+    const unsigned long N = T.size();
+    if (N != p.size()) stop("Arguments must be of the same length");
+    std::vector<double> y;
+    y.reserve(N);
+    for (unsigned long i = 0; i < N; ++i) y.push_back(r797tp::vTp(T[i], p[i]));
     return y;
 }
