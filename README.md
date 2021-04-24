@@ -55,4 +55,4 @@ For the present time the next thermophysical properties can be calculated.
 |Isothermal compressibility          |*K<sub>T*     |1/MPa  |`tpi`        |
 |Mass density                        |*&#961;*      |kg/m³  |`tpr`        |
 
-Since [Industrial Formulation](http://iapws.org/relguide/IF97-Rev.html) abandons usage of iteration algorithms we similarly avoid using them in contrast to *pythonic* [iapws](https://iapws.readthedocs.io/en/latest/index.html). So be ready to meet some inconsistencies when compare results with [wsif97](https://github.com/omega1x/wsif97).
+Since [Industrial Formulation](http://iapws.org/relguide/IF97-Rev.html) abandons usage of iteration algorithms we similarly avoid using them in contrast to *pythonic* [iapws](https://iapws.readthedocs.io/en/latest/index.html). So be ready to meet some inconsistencies when compare those results with [wsif97](https://github.com/omega1x/wsif97).
