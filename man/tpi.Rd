@@ -60,6 +60,10 @@ Vectors \code{T} and \code{p} both must have the same length. Default
   Volume as a Function of Pressure and Temperature v(p,T) for Region 3 of the
   IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and
   Steam}. June 2014.
+
+  \item \href{http://www.iapws.org/relguide/Advise5.pdf}{IAPWS AN5-13(2016)},
+  Advisory Note No. 5: \emph{Industrial Calculation of the Thermodynamic
+  Properties of Seawater}. September 2013.
  }
 }
 \seealso{
