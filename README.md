@@ -31,8 +31,8 @@ The usage of [wsif97](https://github.com/omega1x/wsif97) package is rather strai
 ## Calculate density (kg/m^3) of ordinary water at different temperatures
 ## and pressures:
 > t <- c(300,500,300,700,1500,1500,2000)  # [K]
-> p <- c(3,3,.35e-2,30,.5,30,30)        # [MPa]
-> density <- tpr(t, p)                  # [kg/m^3]
+> p <- c(3,3,.35e-2,30,.5,30,30)          # [MPa]
+> density <- tpr(t, p)                    # [kg/m^3]
 > print(density)
 [1] 997.85294010 831.65754105   0.02532198 184.18016876   0.72225586  43.33482271
 [7]  32.11456228
