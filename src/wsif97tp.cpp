@@ -408,7 +408,7 @@ namespace r797tp2metastable {
     constexpr int N {13};
     constexpr int I[N] {1,1,1,1,2,2,2,3,3,4,4,5,5};
     constexpr int J[N] {0,2,5,11,1,7,16,4,16,7,10,9,10};
-    constexpr double n[N] = {
+    constexpr double n[N] {
         -0.0073362260186506,  -0.088223831943146 , -0.072334555213245  ,
         -0.0040813178534455,   0.0020097803380207, -0.053045921898642  ,
         -0.007619040908697 ,  -0.0063498037657313, -0.086043093028588  ,
@@ -1196,22 +1196,33 @@ namespace r797tp
     int region(double T, double p)   /// Identify region number: 1, 2, 3, 5
     {
         constexpr double pmin {6.11212677444e-4};  /// minimum possible pressure, [MPa]
-        constexpr double ps623 {16.5291642526};  /// saturation pressure at 623.15 K, [MPa]
-        int id = -1;  /// error code
+        constexpr double ps623 {16.5291642526};    /// saturation pressure at 623.15 K, [MPa]
+        const double tsat = r797satline::Tp(p);
+        const double t23 = r797b23::Tp(p);
+        constexpr int N {7};
+        const bool id[N] {
+          false,
+          /// Region 1
+          (pmin <= p && p <= ps623 && 273.15 <= T && T <= tsat) || (
+           ps623 < p && p <= 100 && 273.15 <= T && T <= 623.15),
 
-        if (1073.15 < T && T <= 2273.15 && pmin <= p && p <= 50) id = 5;
-        else if (pmin <= p && p <= ps623) {
-            const double tsat = r797satline::Tp(p);
-            if (273.15 <= T && T <= tsat) id = 1;
-            else if (tsat < T && T <= 1073.15) id = 2;
-        }
-        else if (ps623 < p && p <= 100){
-            const double t23 = r797b23::Tp(p);
-            if (273.15 <= T && T <= 623.15) id = 1;
-            else if (623.15 < T && T < t23) id = 3;
-            else if (t23 <= T && T <= 1073.15) id = 2;
-        }
-        return id;  /// possible values: -1, 1, 2, 3, 5
+          /// Region 2
+          (pmin <= p && p <= ps623 && tsat < T && T <= 1073.15) || (
+           ps623 < p && p <= 100 && t23 <= T && T <= 1073.15),
+
+          /// Region 3
+          ps623 < p && p <= 100 && 623.15 < T && T < t23,
+
+          false,  /// No Region 4
+
+          /// Region 5
+          1073.15 < T && T <= 2273.15 && pmin <= p && p <= 50,
+
+          false /// Fail find region
+        };
+        int i = 0;
+        while (!id[i] && i < N) ++i;
+        return (i == N - 1 ? -1: i); /// possible values: -1, 1, 2, 3, 5
     }
 
     constexpr double error_code[2] {
