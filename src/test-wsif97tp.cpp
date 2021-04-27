@@ -24,7 +24,6 @@
 // might begin an R test file with 'context()', expect the
 // associated context should be wrapped in braced.
 context("IAPWS SR5-05(2016). Verification of subregion boundary equations") {
-
   // The format for specifying tests is similar to that of
   // testthat's R functions. Use 'test_that()' to define a
   // unit test, and use 'expect_true()' and 'expect_false()'

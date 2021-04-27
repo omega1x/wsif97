@@ -923,7 +923,6 @@ namespace sr505tp3{
             else if (tcd < T && T <= tsat) id = 18;             /// s
             else id = (tsat < T && T <= tjk ? 17 : 10);         /// r : k
         } else if (p3cd < p && p <= 20.5) {
-
             if (T <= tcd) id = 2;                               /// c
             else id = (tcd < T && T <= tsat ? 18 : 19);         /// s : t
         } else if (psat623 < p && p <= p3cd)
