@@ -865,7 +865,44 @@ namespace sr505tp3{
         const double tqu = T3qu(p);     const double trx = T3rx(p);
         const double twx = T3wx(p);     const double tuv = T3uv(p);
 
-        /** IAPWS SR5-05 Table 2 */
+        /** IAPWS SR5-05 Table 2 and Table 10 */
+        /*
+        constexpr int N {27};
+        const bool idx[N] {
+            (40.0 < p && p <= 100.0 && T <= tab), /// 3a
+            (40.0 < p && p <= 100.0 && tab < T), /// 3b
+            (25.0 < p && p <=  40.0 && T <= tcd) || (23.5 < p && p <=  25.0 && T <= tcd) || (23.0 < p && p <=  23.5 && T <= tcd) || (22.5 < p && p <=  23.0 && T <= tcd) || (psat643 < p && p <=  22.5 && T <= tcd) || (20.5 < p && p <= psat643 && T <= tcd) || (p3cd < p && p <= 20.5 && T <= tcd) || (psat623 < p && p <= p3cd && T <= tsat), /// 3c
+            (25.0 < p && p <=  40.0 && tcd < T && T <= tab), /// 3d
+            (25.0 < p && p <=  40.0 && tab < T && T <= tef), /// 3e
+            (25.0 < p && p <=  40.0 && tef < T), /// 3f
+            (23.5 < p && p <=  25.0 && tcd < T && T <= tgh), /// 3g
+            (23.5 < p && p <=  25.0 && tgh < T && T <= tef) || (23.0 < p && p <=  23.5 && tgh < T && T <= tef), /// 3h
+            (23.5 < p && p <=  25.0 && tef < T && T<= tij) || (23.0 < p && p <=  23.5 && tef < T && T<= tij), /// 3i
+            (23.5 < p && p <=  25.0 && tij < T && T <= tjk) || (23.0 < p && p <=  23.5 && tij < T && T <= tjk) || (22.5 < p && p <=  23.0 && tij < T && T <= tjk), /// 3j
+            (23.5 < p && p <=  25.0 && tjk < T) || (23.0 < p && p <=  23.5 && tjk < T) || (22.5 < p && p <=  23.0 && tjk < T) || (psat643 < p && p <=  22.5 && tjk < T) || (20.5 < p && p <= psat643 && tjk < T), /// 3k
+            (23.0 < p && p <=  23.5 && tcd < T && T <= tgh) || (22.5 < p && p <=  23.0 && tcd < T && T <= tgh), /// 3l
+            (22.5 < p && p <=  23.0 && tgh < T && T <= tmn), /// 3m
+            (22.5 < p && p <=  23.0 && tmn < T && T <= tef), /// 3n
+            (22.5 < p && p <=  23.0 && tef < T && T < top), /// 3o
+            (22.5 < p && p <=  23.0 && top < T && T <= tij), /// 3p
+            (psat643 < p && p <=  22.5 && tcd < T && T <= tqu), /// 3q
+            (psat643 < p && p <=  22.5 && trx < T && T <= tjk) || (20.5 < p && p <= psat643 && tsat <= T && T <=tjk), /// 3r
+            (20.5 < p && p <= psat643 && tcd < T && T <= tsat) || (p3cd < p && p <= 20.5 && tcd < T && T <= tsat), /// 3s
+            (p3cd < p && p <= 20.5 && tsat < T) || (psat623 < p && p <= p3cd && tsat < tsat), /// 3t
+            (22.11 < p && p <= 22.5 && tqu < T && T <= tuv) || (22.064 < p && p <= 22.11 && tqu < T && T <= tuv) || (T <= tsat && psat0264 < p && p <= 22.064 && tqu < T && T <= tuv) || (T <= tsat && psat643 < p && p <= psat0264 && tqu < T), /// 3u
+            (22.11 < p && p <= 22.5 && tuv < T && T <= tef), /// 3v
+            (22.11 < p && p <= 22.5 && tef < T && T <= twx), /// 3w
+            (tsat <= T && psat0385 < p && p <= 22.064 && twx < T && T <= trx) || (tsat <= T && psat643 < p && p <= psat0385 && T <= trx) || (22.11 < p && p <= 22.5 && twx < T && T <= trx) || (22.064 < p && p <= 22.11 && twx < T && T <= trx), /// 3x
+            (T <= tsat && psat0264 < p && p <= 22.064 && tuv < T) || (22.064 < p && p <= 22.11 && tuv < T && T <= tef), /// 3y
+            (22.064 < p && p <= 22.11 && tef < T && T <= twx) || (tsat <= T && psat0385 < p && p <= 22.064 && T <= twx), /// 3z
+            false
+        };
+
+        int i = 0;
+        while (!idx[i] && i < N) ++i;
+        return (i == N - 1 ? -1: i);
+
+*/
         if (40. < p && p < 100) {
             id = ( T <= tab ? 0 : 1 );                        /// a : b
         } else if (25. < p && p <= 40) {
@@ -928,6 +965,7 @@ namespace sr505tp3{
         } else if (psat623 < p && p <= p3cd)
             id = (T <= tsat ? 2 : 19);                          /// c : t
         return id;
+        //return -1;
     }
 
     /**  Properties **/

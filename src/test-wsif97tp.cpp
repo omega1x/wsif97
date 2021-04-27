@@ -9,6 +9,7 @@
 
 // All test files should include the <testthat.h>
 // header file.
+#include <cmath>
 #include <testthat.h>
 #include "wsif97tp.h"
 
@@ -31,51 +32,51 @@ context("IAPWS SR5-05(2016). Verification of subregion boundary equations") {
   constexpr double EPS7 {1e-7};
 
   test_that("*sr505tp3::T3ab* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3ab(40) - 693.0341408 < EPS7);
+    expect_true(abs(sr505tp3::T3ab(40) - 693.0341408) < EPS7);
   }
 
   test_that("*sr505tp3::T3cd* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3cd(25) - 649.3659208 < EPS7);
+    expect_true(abs(sr505tp3::T3cd(25) - 649.3659208) < EPS7);
   }
 
   test_that("*sr505tp3::T3ef* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3ef(40) - 713.9593992 < EPS7);
+    expect_true(abs(sr505tp3::T3ef(40) - 713.9593992) < EPS7);
   }
 
   test_that("*sr505tp3::T3gh* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3gh(23) - 649.8873759 < EPS7);
+    expect_true(abs(sr505tp3::T3gh(23) - 649.8873759) < EPS7);
   }
 
   test_that("*sr505tp3::T3ij* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3ij(23) - 651.5778091 < EPS7);
+    expect_true(abs(sr505tp3::T3ij(23) - 651.5778091) < EPS7);
   }
 
   test_that("*sr505tp3::T3jk* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3jk(23) - 655.8338344 < EPS7);
+    expect_true(abs(sr505tp3::T3jk(23) - 655.8338344) < EPS7);
   }
 
   test_that("*sr505tp3::T3mn* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3mn(22.8) - 649.6054133 < EPS7);
+    expect_true(abs(sr505tp3::T3mn(22.8) - 649.6054133) < EPS7);
   }
 
   test_that("*sr505tp3::T3op* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3op(22.8) - 650.0106943 < EPS7);
+    expect_true(abs(sr505tp3::T3op(22.8) - 650.0106943) < EPS7);
   }
 
   test_that("*sr505tp3::T3qu* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3qu(22) - 654.6355027 < EPS7);
+    expect_true(abs(sr505tp3::T3qu(22) - 645.6355027) < EPS7);
   }
 
   test_that("*sr505tp3::T3rx* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3rx(22) - 648.2622754 < EPS7);
+    expect_true(abs(sr505tp3::T3rx(22) - 648.2622754) < EPS7);
   }
 
   test_that("*sr505tp3::T3uv* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3uv(22.3) - 647.7996121 < EPS7);
+    expect_true(abs(sr505tp3::T3uv(22.3) - 647.7996121) < EPS7);
   }
 
   test_that("*sr505tp3::T3wx* fails on computer-program verification with IAPWS SR5-05(2016)") {
-    expect_true(sr505tp3::T3wx(22.3) - 648.2049480 < EPS7);
+    expect_true(abs(sr505tp3::T3wx(22.3) - 648.2049480) < EPS7);
   }
 }
 
@@ -138,13 +139,13 @@ context("IAPWS SR5-05(2016). Verification of standalone subregion functions") {
 
   test_that("*sr505tp3::v3Tpid* on computer-program verification with IAPWS SR5-05(2016)") {
     for (int i = 0; i < 52; i++)
-       expect_true(sr505tp3::v3Tpid(
+       expect_true(abs(sr505tp3::v3Tpid(
              verift[i][2], verift[i][1], (int) verift[i][0]
-          )*1e3 - verift[i][3] < 1e-9);
+       )*1e3 - verift[i][3]) < 1e-9);
   }
 
   test_that("*sr505tp3::v3Tp* on computer-program verification with IAPWS SR5-05(2016)") {
     for (int i = 0; i < 52; i++)
-      expect_true(sr505tp3::v3Tp(verift[i][2], verift[i][1])*1e3 - verift[i][3] < 1e-9);
+      expect_true(abs(sr505tp3::v3Tp(verift[i][2], verift[i][1])*1e3 - verift[i][3]) < 1e-9);
   }
 }
