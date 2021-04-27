@@ -723,7 +723,7 @@ namespace sr505tp3{
         return theta;
     }
 
-    constexpr double T3ef(double p) { return 3.727888004 * (p - 22.064) + 647.096; }
+    double T3ef(double p) { return 3.727888004 * (p - 22.064) + 647.096; }
 
     double T3gh(double p)
     {
@@ -857,35 +857,34 @@ namespace sr505tp3{
         constexpr double p3cd = 19.00881189173929;  /// [MPa]
         const double tsat = r797satline::Tp(p); /// saturation temperature, [K]
         int id = -1;  /// Error code if none of the following conditions are met
-        double tcd, tab, tef, tgh, tij, tjk, tmn, top, tqu, trx, twx, tuv = 0;
+
+        const double tcd = T3cd(p);     const double tab = T3ab(p);
+        const double tef = T3ef(p);     const double tgh = T3gh(p);
+        const double tij = T3ij(p);     const double tjk = T3jk(p);
+        const double tmn = T3mn(p);     const double top = T3op(p);
+        const double tqu = T3qu(p);     const double trx = T3rx(p);
+        const double twx = T3wx(p);     const double tuv = T3uv(p);
 
         /** IAPWS SR5-05 Table 2 */
         if (40. < p && p < 100) {
-            id = ( T <= T3ab(p) ? 0 : 1 );                        /// a : b
+            id = ( T <= tab ? 0 : 1 );                        /// a : b
         } else if (25. < p && p <= 40) {
-            tcd = T3cd(p);  tab = T3ab(p);  tef = T3ef(p);
             if (T <= tcd) id = 2;                                /// c
             else if (tcd < T && T <= tab) id = 3;                /// d
             else id = (tab < T && T <= tef ? 4 : 5);             /// e : f
         } else if (23.5 < p  && p <= 25) {
-            tcd = T3cd(p);  tef = T3ef(p);  tgh = T3gh(p);
-            tij = T3ij(p);  tjk = T3jk(p);
             if (T <= tcd) id = 2;                                /// c
             else if (tcd < T && T <= tgh) id = 6;                /// g
             else if (tgh < T && T <= tef) id = 7;                /// h
             else if (tef < T && T <= tij) id = 8;                /// i
             else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
         } else if (23 < p && p <= 23.5) {
-            tcd = T3cd(p);  tef = T3ef(p);  tgh = T3gh(p);
-            tij = T3ij(p);  tjk = T3jk(p);
             if (T <= tcd) id = 2;                                /// c
             else if (tcd < T && T <= tgh) id = 11;               /// l
             else if (tgh < T && T <= tef) id =  7;               /// h
             else if (tef < T && T <= tij) id =  8;               /// i
             else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
         } else if (22.5 < p && p <= 23) {
-            tcd = T3cd(p); tef = T3ef(p); tgh = T3gh(p); tmn = T3mn(p);
-            tij = T3ij(p); tjk = T3jk(p); top = T3op(p);
             if (T <= tcd) id = 2;                                /// c
             else if (tcd < T && T <= tgh) id = 11;               /// l
             else if (tgh < T && T <= tmn) id = 12;               /// m
@@ -894,12 +893,10 @@ namespace sr505tp3{
             else if (top < T && T <= tij) id = 15;               /// p
             else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
         } else if (psat643 < p && p <= 22.5) {
-            tcd = T3cd(p); tqu = T3qu(p); trx = T3rx(p); tjk = T3jk(p);
             if (T <= tcd) id = 2;                                /// c
             else if (tcd < T && T<= tqu) id = 16;                /// q
             else if (tqu < T && T <= trx){
                 /// Table 10
-                tef = T3ef(p);  twx = T3wx(p);  tuv = T3uv(p);
                 if (22.11 < p && p <= 22.5){
                     if (T <= tuv) id = 20;                       /// u
                     else if (tuv <= T && T <= tef) id = 21;      /// v
@@ -922,12 +919,11 @@ namespace sr505tp3{
             }
             else id  = (trx < T && T <= tjk ? 17 : 10);          /// r : k
         } else if (20.5 < p && p <= psat643){
-            tcd = T3cd(p); tjk = T3jk(p);
             if (T <= tcd) id = 2;                               /// c
             else if (tcd < T && T <= tsat) id = 18;             /// s
             else id = (tsat < T && T <= tjk ? 17 : 10);         /// r : k
         } else if (p3cd < p && p <= 20.5) {
-            tcd = T3cd(p);
+
             if (T <= tcd) id = 2;                               /// c
             else id = (tcd < T && T <= tsat ? 18 : 19);         /// s : t
         } else if (psat623 < p && p <= p3cd)
@@ -1199,19 +1195,21 @@ namespace r797tp
         constexpr double ps623 {16.5291642526};    /// saturation pressure at 623.15 K, [MPa]
         const double tsat = r797satline::Tp(p);
         const double t23 = r797b23::Tp(p);
+
+        const bool vacuum  = pmin <= p && p <= ps623;
+        const bool stress = ps623 < p && p <= 100;
+        const bool noice  = 273.15 <= T;
         constexpr int N {7};
         const bool id[N] {
           false,
           /// Region 1
-          (pmin <= p && p <= ps623 && 273.15 <= T && T <= tsat) || (
-           ps623 < p && p <= 100 && 273.15 <= T && T <= 623.15),
+          (vacuum && noice <= T && T <= tsat) || (stress && noice && T <= 623.15),
 
           /// Region 2
-          (pmin <= p && p <= ps623 && tsat < T && T <= 1073.15) || (
-           ps623 < p && p <= 100 && t23 <= T && T <= 1073.15),
+          (vacuum && tsat < T && T <= 1073.15) || (stress && t23 <= T && T <= 1073.15),
 
           /// Region 3
-          ps623 < p && p <= 100 && 623.15 < T && T < t23,
+          stress && 623.15 < T && T < t23,
 
           false,  /// No Region 4
 

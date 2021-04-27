@@ -126,6 +126,8 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP run_testthat_tests(SEXP);
+
 static const R_CallMethodDef CallEntries[] = {
     {"_wsif97_tpcp", (DL_FUNC) &_wsif97_tpcp, 2},
     {"_wsif97_tpcv", (DL_FUNC) &_wsif97_tpcv, 2},
@@ -137,6 +139,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_wsif97_tpu", (DL_FUNC) &_wsif97_tpu, 2},
     {"_wsif97_tpv", (DL_FUNC) &_wsif97_tpv, 2},
     {"_wsif97_tpw", (DL_FUNC) &_wsif97_tpw, 2},
+    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
 

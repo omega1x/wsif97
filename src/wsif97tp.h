@@ -23,32 +23,6 @@
 #define WSIF97TP_H
 
 
-/*
-namespace r797tp1
-{
-    double v1Tp(double T,  double p) ;
-    double u1Tp(double T,  double p) ;
-    double s1Tp(double T,  double p) ;
-    double h1Tp(double T,  double p) ;
-    double cp1Tp(double T, double p) ;
-    double cv1Tp(double T, double p) ;
-    double w1Tp(double T, double p)  ;
-    double e1Tp(double T, double p)  ;
-    double i1Tp(double T, double p)  ;
-}
-
-namespace r797tp2
-{
-    double v2Tp(double T, double p)  ;
-    double u2Tp(double T, double p)  ;
-    double s2Tp(double T, double p)  ;
-    double h2Tp(double T, double p)  ;
-    double cp2Tp(double T, double p) ;
-    double cv2Tp(double T, double p) ;
-    double w2Tp(double T, double p)  ;
-    double e2Tp(double T, double p)  ;
-    double i2Tp(double T, double p)  ;
-}
 
 namespace r797tp2metastable
 {
@@ -65,31 +39,24 @@ namespace r797tp2metastable
 
 namespace sr505tp3
 {
-    double v3Tp(double T, double p) ;
-    double u3Tp(double T, double p) ;
-    double s3Tp(double T, double p) ;
-    double h3Tp(double T, double p) ;
-    double cp3Tp(double T, double p);
-    double cv3Tp(double T, double p);
-    double w3Tp(double T, double p) ;
-    double e3Tp(double T, double p) ;
-    double i3Tp(double T, double p) ;
+    /// exported for unit tests only:
+    double T3ab(double p)  ;
+    double T3cd(double p)  ;
+    double T3ef(double p)  ;
+    double T3gh(double p)  ;
+    double T3ij(double p)  ;
+    double T3jk(double p)  ;
+    double T3mn(double p)  ;
+    double T3op(double p)  ;
+    double T3qu(double p)  ;
+    double T3rx(double p)  ;
+    double T3uv(double p)  ;
+    double T3wx(double p)  ;
+
+    double v3Tpid(double T, double p, int id);
+    double v3Tp(double T, double p);
 }
 
-namespace r797tp5
-{
-    double v5Tp(double T, double p)  ;
-    double u5Tp(double T, double p)  ;
-    double s5Tp(double T, double p)  ;
-    double h5Tp(double T, double p)  ;
-    double cp5Tp(double T, double p) ;
-    double cv5Tp(double T, double p) ;
-    double w5Tp(double T, double p)  ;
-    double e5Tp(double T, double p)  ;
-    double i5Tp(double T, double p)  ;
-}
-
-*/
 
 namespace r797tp
 {

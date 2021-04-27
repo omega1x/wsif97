@@ -14,9 +14,10 @@ License: GPL-3
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports: Rcpp (>= 1.0.5)
-LinkingTo: Rcpp
+LinkingTo: Rcpp, testthat
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
+    xml2,
     covr
 Config/testthat/edition: 3
