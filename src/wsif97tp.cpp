@@ -856,8 +856,8 @@ namespace sr505tp3{
 
         constexpr double p3cd = 19.00881189173929;  /// [MPa]
         const double tsat = r797satline::Tp(p); /// saturation temperature, [K]
-        int id = -1;  /// Error code if none of the following conditions are met
 
+        /** Temperature boundaries */
         const double tcd = T3cd(p);     const double tab = T3ab(p);
         const double tef = T3ef(p);     const double tgh = T3gh(p);
         const double tij = T3ij(p);     const double tjk = T3jk(p);
@@ -866,106 +866,42 @@ namespace sr505tp3{
         const double twx = T3wx(p);     const double tuv = T3uv(p);
 
         /** IAPWS SR5-05 Table 2 and Table 10 */
-        /*
+        const bool zone1 = 22.5 < p && p <= 23.0;
+        const bool zone2 = 25.0 < p && p <= 40.0;
         constexpr int N {27};
-        const bool idx[N] {
-            (40.0 < p && p <= 100.0 && T <= tab), /// 3a
-            (40.0 < p && p <= 100.0 && tab < T), /// 3b
-            (25.0 < p && p <=  40.0 && T <= tcd) || (23.5 < p && p <=  25.0 && T <= tcd) || (23.0 < p && p <=  23.5 && T <= tcd) || (22.5 < p && p <=  23.0 && T <= tcd) || (psat643 < p && p <=  22.5 && T <= tcd) || (20.5 < p && p <= psat643 && T <= tcd) || (p3cd < p && p <= 20.5 && T <= tcd) || (psat623 < p && p <= p3cd && T <= tsat), /// 3c
-            (25.0 < p && p <=  40.0 && tcd < T && T <= tab), /// 3d
-            (25.0 < p && p <=  40.0 && tab < T && T <= tef), /// 3e
-            (25.0 < p && p <=  40.0 && tef < T), /// 3f
-            (23.5 < p && p <=  25.0 && tcd < T && T <= tgh), /// 3g
-            (23.5 < p && p <=  25.0 && tgh < T && T <= tef) || (23.0 < p && p <=  23.5 && tgh < T && T <= tef), /// 3h
-            (23.5 < p && p <=  25.0 && tef < T && T<= tij) || (23.0 < p && p <=  23.5 && tef < T && T<= tij), /// 3i
-            (23.5 < p && p <=  25.0 && tij < T && T <= tjk) || (23.0 < p && p <=  23.5 && tij < T && T <= tjk) || (22.5 < p && p <=  23.0 && tij < T && T <= tjk), /// 3j
-            (23.5 < p && p <=  25.0 && tjk < T) || (23.0 < p && p <=  23.5 && tjk < T) || (22.5 < p && p <=  23.0 && tjk < T) || (psat643 < p && p <=  22.5 && tjk < T) || (20.5 < p && p <= psat643 && tjk < T), /// 3k
-            (23.0 < p && p <=  23.5 && tcd < T && T <= tgh) || (22.5 < p && p <=  23.0 && tcd < T && T <= tgh), /// 3l
-            (22.5 < p && p <=  23.0 && tgh < T && T <= tmn), /// 3m
-            (22.5 < p && p <=  23.0 && tmn < T && T <= tef), /// 3n
-            (22.5 < p && p <=  23.0 && tef < T && T < top), /// 3o
-            (22.5 < p && p <=  23.0 && top < T && T <= tij), /// 3p
-            (psat643 < p && p <=  22.5 && tcd < T && T <= tqu), /// 3q
-            (psat643 < p && p <=  22.5 && trx < T && T <= tjk) || (20.5 < p && p <= psat643 && tsat <= T && T <=tjk), /// 3r
-            (20.5 < p && p <= psat643 && tcd < T && T <= tsat) || (p3cd < p && p <= 20.5 && tcd < T && T <= tsat), /// 3s
-            (p3cd < p && p <= 20.5 && tsat < T) || (psat623 < p && p <= p3cd && tsat < tsat), /// 3t
-            (22.11 < p && p <= 22.5 && tqu < T && T <= tuv) || (22.064 < p && p <= 22.11 && tqu < T && T <= tuv) || (T <= tsat && psat0264 < p && p <= 22.064 && tqu < T && T <= tuv) || (T <= tsat && psat643 < p && p <= psat0264 && tqu < T), /// 3u
-            (22.11 < p && p <= 22.5 && tuv < T && T <= tef), /// 3v
-            (22.11 < p && p <= 22.5 && tef < T && T <= twx), /// 3w
-            (tsat <= T && psat0385 < p && p <= 22.064 && twx < T && T <= trx) || (tsat <= T && psat643 < p && p <= psat0385 && T <= trx) || (22.11 < p && p <= 22.5 && twx < T && T <= trx) || (22.064 < p && p <= 22.11 && twx < T && T <= trx), /// 3x
-            (T <= tsat && psat0264 < p && p <= 22.064 && tuv < T) || (22.064 < p && p <= 22.11 && tuv < T && T <= tef), /// 3y
-            (22.064 < p && p <= 22.11 && tef < T && T <= twx) || (tsat <= T && psat0385 < p && p <= 22.064 && T <= twx), /// 3z
+        const bool id[N] {
+             40.0 < p && p <= 100.0 && T <= tab, /// 3a
+             40.0 < p && p <= 100.0 && tab < T, /// 3b
+            (psat623 < p && p <= p3cd && T <= tsat) || (p3cd < p && p <= 40.0 && T <= tcd), /// 3c
+             zone2 && tcd < T && T <= tab, /// 3d
+             zone2 && tab < T && T <= tef, /// 3e
+             zone2 && tef < T, /// 3f
+             23.5 < p && p <= 25.0 && tcd < T && T <= tgh, /// 3g
+             23.0 < p && p <= 25.0 && tgh < T && T <= tef, /// 3h
+             23.0 < p && p <= 25.0 && tef < T && T <= tij, /// 3i
+             22.5 < p && p <= 25.0 && tij < T && T <= tjk, /// 3j
+             20.5 < p && p <= 25.0 && tjk < T, /// 3k
+             22.5 < p && p <= 23.5 && tcd < T && T <= tgh, /// 3l
+             zone1 && tgh < T && T <= tmn, /// 3m
+             zone1 && tmn < T && T <= tef, /// 3n
+             zone1 && tef < T && T <= top, /// 3o
+             zone1 && top < T && T <= tij, /// 3p
+             psat643 < p && p <=  22.5 && tcd < T && T <= tqu, /// 3q
+             T <= tjk && ((psat643 < p && p <=  22.5 && trx < T) || (20.5 < p && p <= psat643 && tsat <= T)), /// 3r
+             p3cd < p && p <= psat643 && tcd < T && T <= tsat, /// 3s
+             tsat < T && psat623 < p && p <= 20.5, /// 3t
+             tqu < T && ((T <= tuv && ((T <= tsat && psat0264 < p && p <= 22.064) || (22.064 < p && p <= 22.5))) || (T <= tsat && psat643 < p && p <= psat0264)), /// 3u
+             22.11 < p && p <= 22.5 && tuv < T && T <= tef, /// 3v
+             22.11 < p && p <= 22.5 && tef < T && T <= twx, /// 3w
+             T <= trx && ((twx < T && ((tsat <= T && psat0385 < p && p <= 22.064) || (22.064 < p && p <= 22.5))) || (tsat <= T && psat643 < p && p <= psat0385)), /// 3x
+             tuv < T && ((T <= tsat && psat0264 < p && p <= 22.064) || (T <= tef && 22.064 < p && p <= 22.11)), /// 3y
+             T <= twx && ((tef < T && 22.064 < p && p <= 22.11) || (tsat <= T && psat0385 < p && p <= 22.064)), /// 3z
             false
         };
 
         int i = 0;
-        while (!idx[i] && i < N) ++i;
-        return (i == N - 1 ? -1: i);
-
-*/
-        if (40. < p && p < 100) {
-            id = ( T <= tab ? 0 : 1 );                        /// a : b
-        } else if (25. < p && p <= 40) {
-            if (T <= tcd) id = 2;                                /// c
-            else if (tcd < T && T <= tab) id = 3;                /// d
-            else id = (tab < T && T <= tef ? 4 : 5);             /// e : f
-        } else if (23.5 < p  && p <= 25) {
-            if (T <= tcd) id = 2;                                /// c
-            else if (tcd < T && T <= tgh) id = 6;                /// g
-            else if (tgh < T && T <= tef) id = 7;                /// h
-            else if (tef < T && T <= tij) id = 8;                /// i
-            else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
-        } else if (23 < p && p <= 23.5) {
-            if (T <= tcd) id = 2;                                /// c
-            else if (tcd < T && T <= tgh) id = 11;               /// l
-            else if (tgh < T && T <= tef) id =  7;               /// h
-            else if (tef < T && T <= tij) id =  8;               /// i
-            else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
-        } else if (22.5 < p && p <= 23) {
-            if (T <= tcd) id = 2;                                /// c
-            else if (tcd < T && T <= tgh) id = 11;               /// l
-            else if (tgh < T && T <= tmn) id = 12;               /// m
-            else if (tmn < T && T <= tef) id = 13;               /// n
-            else if (tef < T && T <= top) id = 14;               /// o
-            else if (top < T && T <= tij) id = 15;               /// p
-            else id = (tij < T && T <= tjk ? 9 : 10);            /// j : k
-        } else if (psat643 < p && p <= 22.5) {
-            if (T <= tcd) id = 2;                                /// c
-            else if (tcd < T && T<= tqu) id = 16;                /// q
-            else if (tqu < T && T <= trx){
-                /// Table 10
-                if (22.11 < p && p <= 22.5){
-                    if (T <= tuv) id = 20;                       /// u
-                    else if (tuv <= T && T <= tef) id = 21;      /// v
-                    else if (tef <= T && T <= twx) id = 22;      /// w
-                    else id = 23;                                /// x
-                } else if (22.064 < p && p <= 22.11) {
-                    if (T <= tuv) id = 20;                       /// u
-                    else if (tuv <= T && T <= tef) id = 24;      /// y
-                    else if (tef <= T && T <= twx) id = 25;      /// z
-                    else id = 23;                                /// x
-                } else if (T > tsat) {
-                   if (psat643 < p && p <= psat0385) id = 23;    /// x
-                   else if (psat0385 < p && p <= 22.064)
-                       id  =  (T <= twx ? 25 : 23);              /// z : x
-                } else if (T <= tsat) {
-                   if (psat643 < p && p <= psat0264) id = 20;    /// u
-                   else if (psat0264 < p && p <= 22.064)
-                      id = (T <= tuv ? 20 : 24);                 /// u, y
-                }
-            }
-            else id  = (trx < T && T <= tjk ? 17 : 10);          /// r : k
-        } else if (20.5 < p && p <= psat643){
-            if (T <= tcd) id = 2;                               /// c
-            else if (tcd < T && T <= tsat) id = 18;             /// s
-            else id = (tsat < T && T <= tjk ? 17 : 10);         /// r : k
-        } else if (p3cd < p && p <= 20.5) {
-            if (T <= tcd) id = 2;                               /// c
-            else id = (tcd < T && T <= tsat ? 18 : 19);         /// s : t
-        } else if (psat623 < p && p <= p3cd)
-            id = (T <= tsat ? 2 : 19);                          /// c : t
-        return id;
-        //return -1;
+        while (!id[i] && i < N) ++i;
+        return (i == N - 1 ? -1: i);   ///possible values: -1:25, -1 is error code
     }
 
     /**  Properties **/
@@ -1240,10 +1176,10 @@ namespace r797tp
         const bool id[N] {
           false,
           /// Region 1
-          (vacuum && noice <= T && T <= tsat) || (stress && noice && T <= 623.15),
+          (vacuum && noice && T <= tsat) || (stress && noice && T <= 623.15),
 
           /// Region 2
-          (vacuum && tsat < T && T <= 1073.15) || (stress && t23 <= T && T <= 1073.15),
+          T <= 1073.15 && ((vacuum && tsat < T) || (stress && t23 <= T)),
 
           /// Region 3
           stress && 623.15 < T && T < t23,

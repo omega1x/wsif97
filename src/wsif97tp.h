@@ -54,6 +54,7 @@ namespace sr505tp3
     double T3wx(double p)  ;
 
     double v3Tpid(double T, double p, int id);
+    int id3Tp(double T, double p);
     double v3Tp(double T, double p);
 }
 
