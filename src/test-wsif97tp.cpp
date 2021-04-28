@@ -9,7 +9,7 @@
 
 // All test files should include the <testthat.h>
 // header file.
-#include <cmath>
+#include <math.h>
 #include <testthat.h>
 #include "wsif97tp.h"
 
@@ -149,10 +149,8 @@ context("IAPWS SR5-05(2016). Verification of standalone subregion functions") {
       expect_true(sr505tp3::id3Tp(verift[i][2], verift[i][1]) == (int) verift[i][0]);
   }
 
-
   test_that("*sr505tp3::v3Tp* on computer-program verification with IAPWS SR5-05(2016)") {
     for (int i = 0; i < 52; i++)
       expect_true(abs(sr505tp3::v3Tp(verift[i][2], verift[i][1])*1e3 - verift[i][3]) < 1e-9);
   }
-
 }
