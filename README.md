@@ -1,4 +1,4 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub R package version](https://img.shields.io/github/r-package/v/omega1x/wsif97) [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wsif97)](https://cran.r-project.org/package=wsif97) [![CodeFactor](https://www.codefactor.io/repository/github/omega1x/wsif97/badge)](https://www.codefactor.io/repository/github/omega1x/wsif97) [![Build Status](https://travis-ci.com/omega1x/wsif97.svg?branch=master)](https://travis-ci.com/omega1x/wsif97) [![Codecov test coverage](https://codecov.io/gh/omega1x/wsif97/branch/master/graph/badge.svg)](https://codecov.io/gh/omega1x/wsif97?branch=master)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub R package version](https://img.shields.io/github/r-package/v/omega1x/wsif97) [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wsif97)](https://cran.r-project.org/package=wsif97) [![wsif97 status badge](https://omega1x.r-universe.dev/badges/wsif97)](https://omega1x.r-universe.dev) [![CodeFactor](https://www.codefactor.io/repository/github/omega1x/wsif97/badge)](https://www.codefactor.io/repository/github/omega1x/wsif97) [![Build Status](https://travis-ci.com/omega1x/wsif97.svg?branch=master)](https://travis-ci.com/omega1x/wsif97) [![Codecov test coverage](https://codecov.io/gh/omega1x/wsif97/branch/master/graph/badge.svg)](https://codecov.io/gh/omega1x/wsif97?branch=master)
 
 [R-package](https://cran.r-project.org/package=wsif97) for fast calculation of thermophysical properties of water and steam as formulated by *International Association for the Properties of Water and Steam* ([IAPWS](http://iapws.org)).
 
@@ -10,18 +10,16 @@ The package is inspired by [Java IF97](https://www.if97.software/) library and *
 
 # Installation
 
-For the stable release just install the latest version from [CRAN](https://cran.r-project.org/package=wsif97) (if any):
+For the present only [r-universe](https://omega1x.r-universe.dev/) version can be installed:
 
 ```r
-install.packages("wsif97")
-```
-For the development version, you may use [devtools](https://cran.r-project.org/package=devtools):
+# Enable [omega1x] universe
+options(repos = c(omega1x = 'https://omega1x.r-universe.dev', CRAN = 'https://cloud.r-project.org'))
 
-```r
-devtools::install_github("omega1x/wsif97")
+# Install the package
+install.packages('wsif97')
 ```
-
-> NOTE! The package is linked to and imports [Rcpp](https://cran.r-project.org/package=Rcpp)-package as the only dependency.
+> &#8505; The package is linked to and imports [Rcpp](https://cran.r-project.org/package=Rcpp)-package as the only dependency.
 
 # Usage
 
@@ -43,7 +41,7 @@ For the present time the next thermophysical properties can be calculated.
 | Property                           | Designation  | Units |(*T-p*)-space|
 |------------------------------------|--------------|-------|-------------|
 |Temperature                         |*T*           |K      | -           | 
-|Pressure                            |*p*           |Mpa    | -           |
+|Pressure                            |*p*           |MPa    | -           |
 |Specific volume                     |*v*           |m³/kg  |`tpv`        |
 |Specific internal energy            |*u*           |kJ/kg  |`tpu`        |
 |Specific entropy                    |*s*           |kJ/kg/K|`tps`        |
