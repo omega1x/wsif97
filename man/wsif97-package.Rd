@@ -21,7 +21,7 @@
   Unlike most others the package contains
   vectorized functions aimed for speed by using \code{\link{Rcpp-package}} and
   by avoiding double cycling. For actual information about the package
-  see package \href{https://omega1x.github.io/wsif97/}{README.md}.
+  see package \href{https://github.com/omega1x/wsif97/blob/master/README.md}{README.md}.
 }
 \author{
 Yuri Possokhov, possokhoff@gmail.com.
