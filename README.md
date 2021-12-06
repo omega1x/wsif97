@@ -13,11 +13,7 @@ The package is inspired by [Java IF97](https://www.if97.software/) library and *
 For the present only [r-universe](https://omega1x.r-universe.dev/) version can be installed:
 
 ```r
-# Enable [omega1x] universe
-options(repos = c(omega1x = 'https://omega1x.r-universe.dev', CRAN = 'https://cloud.r-project.org'))
-
-# Install the package
-install.packages('wsif97')
+install.packages('wsif97', repos = 'https://omega1x.r-universe.dev')
 ```
 > &#8505; The package is linked to and imports [Rcpp](https://cran.r-project.org/package=Rcpp)-package as the only dependency.
 
