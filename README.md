@@ -1,8 +1,9 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub R package version](https://img.shields.io/github/r-package/v/omega1x/wsif97) [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wsif97)](https://cran.r-project.org/package=wsif97) [![wsif97 status badge](https://omega1x.r-universe.dev/badges/wsif97)](https://omega1x.r-universe.dev) [![CodeFactor](https://www.codefactor.io/repository/github/omega1x/wsif97/badge)](https://www.codefactor.io/repository/github/omega1x/wsif97) [![Build Status](https://travis-ci.com/omega1x/wsif97.svg?branch=master)](https://travis-ci.com/omega1x/wsif97) [![Codecov test coverage](https://codecov.io/gh/omega1x/wsif97/branch/master/graph/badge.svg)](https://codecov.io/gh/omega1x/wsif97?branch=master)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub R package version](https://img.shields.io/github/r-package/v/omega1x/wsif97) [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wsif97)](https://cran.r-project.org/package=wsif97) [![wsif97 status badge](https://omega1x.r-universe.dev/badges/wsif97)](https://omega1x.r-universe.dev) [![CodeFactor](https://www.codefactor.io/repository/github/omega1x/wsif97/badge)](https://www.codefactor.io/repository/github/omega1x/wsif97) [![Codecov test coverage](https://codecov.io/gh/omega1x/wsif97/branch/master/graph/badge.svg)](https://codecov.io/gh/omega1x/wsif97?branch=master)
 
 [R-package](https://cran.r-project.org/package=wsif97) for fast calculation of thermophysical properties of water and steam as formulated by *International Association for the Properties of Water and Steam* ([IAPWS](http://iapws.org)).
 
 ------------------------------------------------------------------------
+> &#9888; The development and support of this package has been finally discontinued. Use *CRAN*-package [iapws](https://cran.r-project.org/web/packages/iapws/index.html) instead.
 
 # Intro
 
